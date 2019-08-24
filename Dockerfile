@@ -3,7 +3,6 @@ FROM ubuntu:latest
 RUN apt-get update && \
       apt-get -y install sudo
 
-RUN useradd -m root && echo "root:root" | chpasswd && adduser root sudo
 
 USER root
 
