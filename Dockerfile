@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
-RUN apt-get update && \
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
       apt-get -y install sudo
 
 
