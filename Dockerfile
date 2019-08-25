@@ -6,17 +6,18 @@ RUN sudo dpkg --add-architecture i386 && \
 
 
 
-
+RUN usermod -a -G sudo gitpod
 RUN sudo apt-get install openjdk-8-jdk git ccache automake lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven -y && \
     sudo add-apt-repository ppa:openjdk-r/ppa && \
-    sudo apt-get update && sudo apt-get install openjdk-8-jdk -y && \
-    mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo && \
-    cd ~/bin && ls
-RUN usermod -a -G sudo gitpod
+    sudo apt-get update && sudo apt-get install openjdk-8-jdk -y
+
 
 USER gitpod
 
-ENV PATH=~/bin:$PATH \
+RUN mkdir /bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /bin/repo && chmod a+x /bin/repo && \
+    cd /bin && ls
+
+ENV PATH=/bin:$PATH \
     USE_CCACHE=1
 
 
