@@ -1,7 +1,7 @@
-FROM ubuntu:latest
+FROM gitpod/workspace-full
 
 RUN dpkg --add-architecture i386 && \
-    apt-get update && \
+    apt-get update -y && \
       apt-get -y install sudo
 
 
@@ -13,10 +13,14 @@ RUN sudo apt-get remove openjdk-* icedtea-* icedtea6-* && \
     sudo apt-get update && sudo apt-get install openjdk-8-jdk -y && \
     mkdir ~/bin && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo && chmod a+x ~/bin/repo
 
+RUN usermod -a -G sudo gitpod
+
 ENV PATH=~/bin:$PATH \
     USE_CCACHE=1
 
-RUN mkdir pe && cd pe && \
+USER gitpod
+
+RUN cd /home/gitpod && mkdir pe && cd pe && \
     repo init -u https://github.com/PixelExperience/manifest -b pie && \
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
