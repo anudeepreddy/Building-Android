@@ -14,13 +14,15 @@ RUN sudo apt-get install openjdk-8-jdk git ccache automake lzop bison gperf buil
 
 RUN usermod -a -G sudo gitpod
 
+USER gitpod
+
 ENV PATH=~/bin:$PATH \
     USE_CCACHE=1
 
-USER gitpod
+
 
 RUN cd /home/gitpod && mkdir pe && cd pe && \
-    /bin/repo init -u https://github.com/PixelExperience/manifest -b pie && \
-    /bin/repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+    repo init -u https://github.com/PixelExperience/manifest -b pie && \
+    repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
 
