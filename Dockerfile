@@ -14,7 +14,7 @@ RUN sudo apt-get install openjdk-8-jdk git ccache automake lzop bison gperf buil
 
 USER gitpod
 
-RUN curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /bin/repo && chmod a+x /bin/repo && \
+RUN sudo curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /bin/repo && sudo chmod a+x /bin/repo && \
     cd /bin && ls
 
 ENV PATH=/bin:$PATH \
