@@ -20,7 +20,7 @@ ENV PATH=~/bin:$PATH \
 USER gitpod
 
 RUN cd /home/gitpod && mkdir pe && cd pe && \
-    repo init -u https://github.com/PixelExperience/manifest -b pie && \
-    repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+    /bin/repo init -u https://github.com/PixelExperience/manifest -b pie && \
+    /bin/repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
 
